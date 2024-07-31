@@ -7,10 +7,13 @@ if ($url === '/listar') {
     view('listar');
 } else if ($url === '/cadastro') {
 
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-
+    if ($_POST) {
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $telefone = $_POST['telefone'];
+    
+        
+    }
     // INSERT INTO .........
 
     view('cadastro');
