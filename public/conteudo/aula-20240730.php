@@ -7,13 +7,13 @@ $nomeCompleto = "Antonio" . $nome;
 
 $numero = 10;
 
-// if ($numero === '10') {
-//     echo "Igual";
-// }
+if ($numero === '10') {
+    echo "Igual";
+}
 
-// for ($i = 10; $i <= 100; $i += 10) {
-//     echo $i;
-// }
+for ($i = 10; $i <= 100; $i += 10) {
+    echo $i;
+}
 
 
 
@@ -39,6 +39,11 @@ $alunos[10] = 'Rosana';
 $alunos[8] = 'Samantha';
 $alunos[11] = 'Nayara';
 $alunos['dez'] = 'Edivan'; 
+
+
+
+
+
 
 
 foreach ($alunos as $posicao => $cada) {

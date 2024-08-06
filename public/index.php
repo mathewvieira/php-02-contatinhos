@@ -3,7 +3,7 @@
 //pegando a url que o usuario acessou
 $url = $_SERVER['REQUEST_URI'];
 
-if ($url === '/listar') {
+if ($url === '/listar' || $url === '/') {
     view('listar');
 } else if ($url === '/cadastro') {
 
