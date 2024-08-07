@@ -10,14 +10,23 @@
     </thead>
     <tbody>
         <?php
-            for ($i = 1; $i <= 10; $i++) {
+        
+            $conexao = require_once '../src/conexao.php';
+
+            $resultado = $conexao->query('SELECT * FROM tb_contatos;');
+
+            // foreach ($resultado->fetchAll() as $cada) {
+            foreach ($resultado as $cada) {
                 echo "
                     <tr>
-                        <td>{$i}</td>
-                        <td>Fulano</td>
-                        <td>fulano@email.com</td>
-                        <td>85 9 8888-9898</td>
-                        <td></td>
+                        <td>{$cada['id']}</td>
+                        <td>{$cada['nome']}</td>
+                        <td>{$cada['email']}</td>
+                        <td>{$cada['telefone']}</td>
+                        <td>
+                            <a href=''>Editar</a>
+                            <a href=''>Excluir</a>
+                        </td>
                     </tr>
                 ";
             }
