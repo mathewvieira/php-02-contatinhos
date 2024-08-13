@@ -1,35 +1,35 @@
 <table class="table table-striped table-hover">
-    <thead class="table-dark">
-        <tr>
-            <th>#ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        
-            $conexao = require_once '../src/conexao.php';
+	<thead class="table-dark">
+		<tr>
+			<th>ID</th>
+			<th>Nome</th>
+			<th>Email</th>
+			<th>Telefone</th>
+			<th>Ações</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php
 
-            $resultado = $conexao->query('SELECT * FROM tb_contatos;');
+		$conn = require_once '../src/conexao.php';
 
-            // foreach ($resultado->fetchAll() as $cada) {
-            foreach ($resultado as $cada) {
-                echo "
-                    <tr>
-                        <td>{$cada['id']}</td>
-                        <td>{$cada['nome']}</td>
-                        <td>{$cada['email']}</td>
-                        <td>{$cada['telefone']}</td>
-                        <td>
-                            <a href=''>Editar</a>
-                            <a href=''>Excluir</a>
-                        </td>
-                    </tr>
-                ";
-            }
-        ?>
-    </tbody>
+		$rows = $conn->query('SELECT * FROM tb_contatos;');
+
+		foreach ($rows->fetchAll() as $row) {
+			echo "
+				<tr>
+					<td>{$row['id']}</td>
+					<td>{$row['nome']}</td>
+					<td>{$row['email']}</td>
+					<td>{$row['telefone']}</td>
+					<td>
+						<a href='/editar?id={$row["id"]}'>Editar</a>
+						<a href='/deletar?id={$row["id"]}'>Excluir</a>
+					</td>
+				</tr>
+			";
+		}
+
+		?>
+	</tbody>
 </table>
