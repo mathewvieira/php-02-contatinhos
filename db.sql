@@ -1,3 +1,8 @@
+sudo docker rm <container> --force
+sudo docker exec -it setup-mysql bash
+mysql -u user -ppassword
+use db_name;
+
 -- comando para listar os banco de dados --
 SHOW DATABASES;
 

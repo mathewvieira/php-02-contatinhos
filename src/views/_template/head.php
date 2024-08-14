@@ -12,13 +12,18 @@
 </head>
 
 <body class="container" style="background-color: #EFEFEF;">
+
     <h1 class="mt-3">Contatinhos 🫣</h1>
 
     <hr>
 
+    <?php $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); ?>
+
     <nav>
-        <a class="btn btn-outline-dark" href="/listar">Listar</a>
-        <a class="btn btn-outline-dark" href="/cadastrar">Cadastrar</a>
+        <a class="btn <?php echo $url === "/contatos/listar" ? 'btn-dark' : 'btn-outline-primary' ?>" href="/contatos/listar">Listar Contatos</a>
+        <a class="btn <?php echo $url === "/contatos/adicionar" ? 'btn-dark' : 'btn-outline-primary' ?>" href="/contatos/adicionar">Adicionar Contatos</a>
+        <a class="btn <?php echo $url === "/lugares/listar" ? 'btn-dark' : 'btn-outline-secondary' ?>" href="/lugares/listar">Listar Lugares</a>
+        <a class="btn <?php echo $url === "/lugares/adicionar" ? 'btn-dark' : 'btn-outline-secondary' ?>" href="/lugares/adicionar">Adicionar Lugares</a>
     </nav>
 
     <hr>

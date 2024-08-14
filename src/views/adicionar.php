@@ -24,7 +24,7 @@
 <script>
   input_nome.addEventListener('blur', () => {
     if (input_nome.value === '') {
-      erros.innerHTML = `<div class="alert alert-danger">Nome Invalido</div>`;
+      erros.innerHTML = `<div class="alert alert-danger">Nome Inválido</div>`;
 
       input_nome.classList.add('is-invalid');
       btn_enviar.setAttribute('disabled', 'disabled');

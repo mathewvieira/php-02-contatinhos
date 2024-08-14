@@ -11,20 +11,16 @@
 	<tbody>
 		<?php
 
-		$conn = require_once '../src/conexao.php';
-
-		$rows = $conn->query('SELECT * FROM tb_contatos;');
-
-		foreach ($rows->fetchAll() as $row) {
+		foreach ($contacts as $contact) {
 			echo "
 				<tr>
-					<td>{$row['id']}</td>
-					<td>{$row['nome']}</td>
-					<td>{$row['email']}</td>
-					<td>{$row['telefone']}</td>
+					<td>{$contact['id']}</td>
+					<td>{$contact['nome']}</td>
+					<td>{$contact['email']}</td>
+					<td>{$contact['telefone']}</td>
 					<td>
-						<a href='/editar?id={$row["id"]}'>Editar</a>
-						<a href='/deletar?id={$row["id"]}'>Excluir</a>
+						<a href='/contatos/editar?id={$contact["id"]}'>Editar</a>
+						<a href='/contatos/deletar?id={$contact["id"]}'>Excluir</a>
 					</td>
 				</tr>
 			";
