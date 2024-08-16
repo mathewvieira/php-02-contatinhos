@@ -2,7 +2,7 @@
 
 include '../config/routes.php';
 
-function view(string $name, mixed $contacts = []): void
+function view(string $name, mixed $data = []): void
 {
   // include: ele tenta, se der erro, ele continua a aplicacao
   // require: ele tenta, se der erro, ele para a aplicacao
