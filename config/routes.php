@@ -23,7 +23,7 @@ $controller = match ($url) {
     default => null
 };
 
-if ($controller !== NULL) {
+if ($controller !== null) {
     $controller();
     exit;
 }
