@@ -22,14 +22,17 @@
     <?php $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); ?>
 
     <nav>
-        <a class="btn <?php echo $url === "/contatos/listar" ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="/contatos/listar">Listar Contatos</a>
-        <a class="btn <?php echo $url === "/contatos/adicionar" ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="/contatos/adicionar">Adicionar Contatos</a>
-        <a class="btn <?php echo $url === "/lugares/listar" ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="/lugares/listar">Listar Lugares</a>
-        <a class="btn <?php echo $url === "/lugares/adicionar" ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="/lugares/adicionar">Adicionar Lugares</a>
+        <a class="btn <?php echo $url === routeContatosListar ? 'btn-info' : 'btn-outline-info'; ?>"
+            href="<?php echo routeContatosListar; ?>">Listar Contatos</a>
+
+        <a class="btn <?php echo $url === routeContatosAdicionar ? 'btn-info' : 'btn-outline-info'; ?>"
+            href="<?php echo routeContatosAdicionar; ?>">Adicionar Contatos</a>
+
+        <a class="btn <?php echo $url === routeLugaresListar ? 'btn-info' : 'btn-outline-info'; ?>"
+            href="<?php echo routeLugaresListar; ?>">Listar Lugares</a>
+
+        <a class="btn <?php echo $url === routeLugaresAdicionar ? 'btn-info' : 'btn-outline-info'; ?>"
+            href="<?php echo routeLugaresAdicionar; ?>">Adicionar Lugares</a>
     </nav>
 
     <hr>

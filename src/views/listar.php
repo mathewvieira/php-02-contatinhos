@@ -19,8 +19,8 @@
 					<td>
 						<?php
 
-						$linkEditar = "/contatos/editar?id={$row["id"]}";
-						$linkExcluir = "/contatos/excluir?id={$row["id"]}";
+						$linkEditar = routeContatosEditar . "?id={$row["id"]}";
+						$linkExcluir = routeContatosExcluir . "?id={$row["id"]}";
 
 						?>
 
@@ -33,7 +33,7 @@
 						<a href='<?php echo $linkExcluir; ?>'>Excluir</a>
 					</td>
 				</tr>
-			<? } ?>
+			<?php } ?>
 		</tbody>
 	</table>
 </div>

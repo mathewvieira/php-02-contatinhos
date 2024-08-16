@@ -1,9 +1,9 @@
 <?php
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$isContatosAdicionar = $url === "/contatos/adicionar";
-$isContatosEditar = $url === "/contatos/editar";
-$isContatosExcluir = $url === "/contatos/excluir";
+$isContatosAdicionar = $url === routeContatosAdicionar;
+$isContatosEditar = $url === routeContatosEditar;
+$isContatosExcluir = $url === routeContatosExcluir;
 
 $disabledInputClass = "bg-secondary bg-opacity-10 not-allowed";
 
@@ -47,7 +47,9 @@ $inputCssClass = "class='form-control mb-3 " . ($isContatosExcluir ? $disabledIn
         ?>>
 
         <div class="d-flex justify-content-between">
-          <a id="btn_cancelar" class="btn btn-danger flex-fill me-2" href="/contatos/listar">Cancelar</a>
+          <a id="btn_cancelar" class="btn btn-danger flex-fill me-2"
+            href="<?php echo routeContatosListar; ?>">Cancelar</a>
+
           <button id="btn_enviar" class="btn btn-success w-25">OK</button>
         </div>
       </form>

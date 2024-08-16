@@ -3,20 +3,22 @@
 include '../src/controllers/lugares.php';
 include '../src/controllers/contatos.php';
 
+include_once '../config/routesNames.php';
+
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $controller = match ($url) {
-    '/' => 'contatos_listar',
+    routeHome => 'contatos_listar',
 
-    '/contatos/listar' => 'contatos_listar',
-    '/contatos/excluir' => 'contatos_excluir',
-    '/contatos/editar' => 'contatos_editar',
-    '/contatos/adicionar' => 'contatos_adicionar',
+    routeContatosListar => 'contatos_listar',
+    routeContatosExcluir => 'contatos_excluir',
+    routeContatosEditar => 'contatos_editar',
+    routeContatosAdicionar => 'contatos_adicionar',
 
-    '/lugares/listar' => 'lugares_listar',
-    '/lugares/excluir' => 'lugares_excluir',
-    '/lugares/editar' => 'lugares_editar',
-    '/lugares/adicionar' => 'lugares_adicionar',
+    routeLugaresListar => 'lugares_listar',
+    routeLugaresExcluir => 'lugares_excluir',
+    routeLugaresEditar => 'lugares_editar',
+    routeLugaresAdicionar => 'lugares_adicionar',
 
     default => null
 };

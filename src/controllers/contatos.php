@@ -26,7 +26,7 @@ function contatos_editar(): void
       $query->bindParam(':telefone', $telefone, PDO::PARAM_STR);
       $query->execute();
 
-      header('location: /contatos/listar');
+      header('location: ' . routeContatosListar);
     }
 
     $query = connection()->prepare("SELECT * FROM tb_contatos WHERE id = :id; ");
@@ -47,7 +47,7 @@ function contatos_excluir(): void
       $query->bindParam(':id', $id, PDO::PARAM_INT);
       $query->execute();
 
-      header('location: /contatos/listar');
+      header('location: ' . routeContatosListar);
     }
 
     $query = connection()->prepare("SELECT * FROM tb_contatos WHERE id = :id; ");
@@ -73,7 +73,7 @@ function contatos_adicionar(): void
     $query->bindParam(':data_cadastro', $dataCadastro, PDO::PARAM_STR);
     $query->execute();
 
-    header('location: /contatos/listar');
+    header('location: ' . routeContatosListar);
   }
 
   view('adicionar');
