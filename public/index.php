@@ -13,6 +13,11 @@ function view(string $name, mixed $data = []): void
     include "../src/views/_template/footer.php";
 }
 
+function request_input(string $nome): mixed
+{
+    return htmlspecialchars($_POST[$nome] ?? $_GET[$nome]);
+}
+
 function connection()
 {
     return include "../src/conexao.php";

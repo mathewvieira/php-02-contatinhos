@@ -29,29 +29,32 @@ $inputCssClass = "class='form-control mb-3 " . ($isContatosExcluir ? $disabledIn
 
             <form action="" method="post">
                 <label for="input_nome">Nome</label>
-                <input id="input_nome" type="text" name="nome" <?php
-                echo $inputCssClass;
-                echo $isContatosExcluir ? ' readonly ' : ' ';
-                echo !$isContatosAdicionar ? " value='{$data['nome']}' " : '';
-                ?>>
+                <input id="input_nome" type="text" name="nome"
+                    <?php
+                    echo $inputCssClass;
+                    echo $isContatosExcluir ? ' readonly ' : ' ';
+                    echo !$isContatosAdicionar ? " value='{$data['nome']}' " : '';
+                    ?>>
 
                 <label for="input_email">Email</label>
-                <input id="input_email" type="text" name="email" <?php
-                echo $inputCssClass;
-                echo $isContatosExcluir ? ' readonly ' : ' ';
-                echo !$isContatosAdicionar ? " value='{$data['email']}' " : '';
-                ?>>
+                <input id="input_email" type="text" name="email"
+                    <?php
+                    echo $inputCssClass;
+                    echo $isContatosExcluir ? ' readonly ' : ' ';
+                    echo !$isContatosAdicionar ? " value='{$data['email']}' " : '';
+                    ?>>
 
                 <label for="input_telefone">Telefone</label>
-                <input id="input_telefone" type="text" name="telefone" <?php
-                echo $inputCssClass;
-                echo $isContatosExcluir ? ' readonly ' : ' ';
-                echo !$isContatosAdicionar ? " value='{$data['telefone']}' " : '';
-                ?>>
+                <input id="input_telefone" type="text" name="telefone"
+                    <?php
+                    echo $inputCssClass;
+                    echo $isContatosExcluir ? ' readonly ' : ' ';
+                    echo !$isContatosAdicionar ? " value='{$data['telefone']}' " : '';
+                    ?>>
 
                 <div class="d-flex justify-content-between">
                     <a id="btn_cancelar" class="btn btn-danger flex-fill me-2"
-                    href="<?php echo routeContatosListar; ?>">Cancelar</a>
+                        href="<?php echo routeContatosListar; ?>">Cancelar</a>
 
                     <button id="btn_enviar" class="btn btn-success w-25">OK</button>
                 </div>

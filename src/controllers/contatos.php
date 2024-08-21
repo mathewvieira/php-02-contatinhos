@@ -2,71 +2,80 @@
 
 declare(strict_types=1);
 
+const SQL_CONTATOS_INSERT = 'INSERT INTO tb_contatos (nome, email, telefone, data_cadastro) VALUES (:nome, :email, :telefone, :data_cadastro); ';
+const SQL_CONTATOS_SELECT_ALL = 'SELECT * FROM tb_contatos; ';
+const SQL_CONTATOS_SELECT_BY_ID = 'SELECT * FROM tb_contatos WHERE id = :id; ';
+const SQL_CONTATOS_UPDATE_BY_ID = 'UPDATE tb_contatos SET nome = :nome, email = :email, telefone = :telefone WHERE id = :id; ';
+const SQL_CONTATOS_DELETE_BY_ID = 'DELETE FROM tb_contatos WHERE id = :id; ';
+
 function contatos_listar(): void
 {
-    $rows = connection()->query("SELECT * FROM tb_contatos; ");
+    $query = connection()->prepare(SQL_CONTATOS_SELECT_ALL);
+    $query->execute();
 
-    view('listar', $rows->fetchAll());
+    view('contatosListar', $query->fetchAll());
 }
 
 function contatos_editar(): void
 {
-    if (isset($_GET['id'])) {
-        $id = htmlspecialchars($_GET["id"]);
+    if (!isset($_GET['id']))
+        header('location: ' . routeContatosListar);
 
-        if ($_POST) {
-            $nome = htmlspecialchars($_POST['nome']);
-            $email = htmlspecialchars($_POST['email']);
-            $telefone = htmlspecialchars($_POST['telefone']);
+    $id = request_input('id');
 
-            $query = connection()->prepare("UPDATE tb_contatos SET nome = :nome, email = :email, telefone = :telefone WHERE id = :id; ");
-            $query->bindParam(':id', $id, PDO::PARAM_INT);
-            $query->bindParam(':nome', $nome, PDO::PARAM_STR);
-            $query->bindParam(':email', $email, PDO::PARAM_STR);
-            $query->bindParam(':telefone', $telefone, PDO::PARAM_STR);
-            $query->execute();
+    if ($_POST) {
+        $nome = request_input('nome');
+        $email = request_input('email');
+        $telefone = request_input('telefone');
 
-            header('location: ' . routeContatosListar);
-        }
-
-        $query = connection()->prepare("SELECT * FROM tb_contatos WHERE id = :id; ");
+        $query = connection()->prepare(SQL_CONTATOS_UPDATE_BY_ID);
         $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->bindParam(':telefone', $telefone, PDO::PARAM_STR);
         $query->execute();
 
-        view('editar', $query->fetch(PDO::FETCH_ASSOC));
+        header('location: ' . routeContatosListar);
     }
+
+    $query = connection()->prepare(SQL_CONTATOS_SELECT_BY_ID);
+    $query->bindParam(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+
+    view('contatosEditar', $query->fetch(PDO::FETCH_ASSOC));
 }
 
 function contatos_excluir(): void
 {
-    if (isset($_GET['id'])) {
-        $id = htmlspecialchars($_GET["id"]);
+    if (!isset($_GET['id']))
+        header('location: ' . routeContatosListar);
 
-        if ($_POST) {
-            $query = connection()->prepare("DELETE FROM tb_contatos WHERE id = :id; ");
-            $query->bindParam(':id', $id, PDO::PARAM_INT);
-            $query->execute();
+    $id = request_input('id');
 
-            header('location: ' . routeContatosListar);
-        }
-
-        $query = connection()->prepare("SELECT * FROM tb_contatos WHERE id = :id; ");
+    if ($_POST) {
+        $query = connection()->prepare(SQL_CONTATOS_DELETE_BY_ID);
         $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
-        view('excluir', $query->fetch(PDO::FETCH_ASSOC));
+        header('location: ' . routeContatosListar);
     }
+
+    $query = connection()->prepare(SQL_CONTATOS_SELECT_BY_ID);
+    $query->bindParam(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+
+    view('contatosExcluir', $query->fetch(PDO::FETCH_ASSOC));
 }
 
 function contatos_adicionar(): void
 {
     if ($_POST) {
-        $nome = htmlspecialchars($_POST['nome']);
-        $email = htmlspecialchars($_POST['email']);
-        $telefone = htmlspecialchars($_POST['telefone']);
+        $nome = request_input('nome');
+        $email = request_input('email');
+        $telefone = request_input('telefone');
         $dataCadastro = date('d/m/Y');
 
-        $query = connection()->prepare("INSERT INTO tb_contatos (nome, email, telefone, data_cadastro) VALUES (:nome, :email, :telefone, :data_cadastro); ");
+        $query = connection()->prepare(SQL_CONTATOS_INSERT);
         $query->bindParam(':nome', $nome, PDO::PARAM_STR);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->bindParam(':telefone', $telefone, PDO::PARAM_STR);
@@ -76,5 +85,19 @@ function contatos_adicionar(): void
         header('location: ' . routeContatosListar);
     }
 
-    view('adicionar');
+    view('contatosAdicionar');
 }
+
+/*  
+
+    Alternativa para o BindParam()
+
+    $sql = conexao()->prepare($query);
+
+    $sql->execute([
+        ':nome' => $nome,
+        ':email' => $email,
+        ':telefone' => $telefone
+    ]);
+
+*/

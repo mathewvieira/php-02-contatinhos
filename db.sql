@@ -92,5 +92,11 @@ FROM
 LIMIT 100 
 ORDER BY data_cadastro DESC;
 
-
-
+CREATE TABLE tb_lugares (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    avaliacao INT,
+    createdAt TIMESTAMP,
+    editedAt TIMESTAMP
+);
