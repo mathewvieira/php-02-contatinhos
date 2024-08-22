@@ -1,62 +1,52 @@
-<?php
-$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-$isLugaresAdicionar = $url === routeLugaresAdicionar;
-$isLugaresEditar = $url === routeLugaresEditar;
-$isLugaresExcluir = $url === routeLugaresExcluir;
-
-$disabledInputClass = "bg-secondary bg-opacity-10 not-allowed";
-
-$inputCssClass = "class='form-control mb-3 " . ($isLugaresExcluir ? $disabledInputClass : '') . "'";
-?>
+<?php $url = getCurrentUrl(); ?>
 
 <section class="row">
     <div class="col">
         <div class="card card-body">
-            <?php
-            echo !$isLugaresExcluir ? '<div id="div_erros"></div>' : '';
+            <?php printTitle($url); ?>
 
-            if ($isLugaresAdicionar) {
-                echo '<h4>Adicionar lugar</h4>';
-            }
-            if ($isLugaresEditar) {
-                echo '<h4>Editar lugar</h4>';
-            }
-            if ($isLugaresExcluir) {
-                echo '<h4>Confirmar exclusão?</h4>';
-            }
-            ?>
+            <div id="form-warning"></div>
 
             <form action="" method="post">
-                <label for="input_nome">Nome</label>
-                <input id="input_nome" type="text" name="nome"
-                    <?php
-                    echo $inputCssClass;
-                    echo $isLugaresExcluir ? ' readonly ' : ' ';
-                    echo !$isLugaresAdicionar ? " value='{$data['nome']}' " : '';
-                    ?>>
+                <label for="input-nome">Nome</label>
+                <input id="input-nome" type="text" name="nome" <?php printInputEssentials($url, $data, 'nome'); ?>>
 
-                <label for="input_endereco">Endereço</label>
-                <input id="input_endereco" type="text" name="endereco"
-                    <?php
-                    echo $inputCssClass;
-                    echo $isLugaresExcluir ? ' readonly ' : ' ';
-                    echo !$isLugaresAdicionar ? " value='{$data['endereco']}' " : '';
-                    ?>>
+                <label for="input-endereco">Endereço</label>
+                <input id="input-endereco" type="text" name="endereco" <?php printInputEssentials($url, $data, 'endereco'); ?>>
 
-                <label for="input_avaliacao">Avaliação</label>
-                <input id="input_avaliacao" type="range" min="1" max="5" name="avaliacao"
-                    <?php
-                    echo $inputCssClass;
-                    echo $isLugaresExcluir ? ' readonly ' : ' ';
-                    echo !$isLugaresAdicionar ? " value='{$data['avaliacao']}' " : '';
-                    ?>>
+                <label>Avaliação</label>
+                <div class="form-control mb-3 star-rating d-flex justify-content-between">
+                    <div>
+                        <input type="radio" id="star-1" name="avaliacao" value="1" <?php printAttrChecked($url, $data, 'avaliacao', 1, true); ?>>
+                        <label for="star-1">1 <i class="bi bi-star-fill"></i></label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="star-2" name="avaliacao" value="2" <?php printAttrChecked($url, $data, 'avaliacao', 2); ?>>
+                        <label for="star-2">2 <i class="bi bi-star-fill"></i></label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="star-3" name="avaliacao" value="3" <?php printAttrChecked($url, $data, 'avaliacao', 3); ?>>
+                        <label for="star-3">3 <i class="bi bi-star-fill"></i></label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="star-4" name="avaliacao" value="4" <?php printAttrChecked($url, $data, 'avaliacao', 4); ?>>
+                        <label for="star-4">4 <i class="bi bi-star-fill"></i></label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="star-5" name="avaliacao" value="5" <?php printAttrChecked($url, $data, 'avaliacao', 5); ?>>
+                        <label for="star-5">5 <i class="bi bi-star-fill"></i></label>
+                    </div>
+                </div>
 
                 <div class="d-flex justify-content-between">
-                    <a id="btn_cancelar" class="btn btn-danger flex-fill me-2"
-                        href="<?php echo routeLugaresListar; ?>">Cancelar</a>
+                    <a id="btn-cancelar" class="btn btn-danger flex-fill me-2"
+                        href="<?php echo ROUTE_LUGARES_LISTAR; ?>">Cancelar</a>
 
-                    <button id="btn_enviar" class="btn btn-success w-25">OK</button>
+                    <button id="btn-enviar" class="btn btn-success w-25">OK</button>
                 </div>
             </form>
         </div>

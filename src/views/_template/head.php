@@ -19,20 +19,20 @@
 
     <hr>
 
-    <?php $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); ?>
+    <?php $url = getCurrentUrl(); ?>
 
     <nav>
-        <a class="btn <?php echo $url === routeContatosListar ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="<?php echo routeContatosListar; ?>">Listar Contatos</a>
+        <a class="btn <?php echo $url === ROUTE_CONTATOS_LISTAR ? 'btn-info' : 'btn-outline-info'; ?>"
+            href="<?php echo ROUTE_CONTATOS_LISTAR; ?>">Listar Contatos</a>
 
-        <a class="btn <?php echo $url === routeContatosAdicionar ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="<?php echo routeContatosAdicionar; ?>">Adicionar Contatos</a>
+        <a class="btn <?php echo $url === ROUTE_CONTATOS_ADICIONAR ? 'btn-info' : 'btn-outline-info'; ?>"
+            href="<?php echo ROUTE_CONTATOS_ADICIONAR; ?>">Adicionar Contatos</a>
 
-        <a class="btn <?php echo $url === routeLugaresListar ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="<?php echo routeLugaresListar; ?>">Listar Lugares</a>
+        <a class="btn <?php echo $url === ROUTE_LUGARES_LISTAR ? 'btn-info' : 'btn-outline-info'; ?>"
+            href="<?php echo ROUTE_LUGARES_LISTAR; ?>">Listar Lugares</a>
 
-        <a class="btn <?php echo $url === routeLugaresAdicionar ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="<?php echo routeLugaresAdicionar; ?>">Adicionar Lugares</a>
+        <a class="btn <?php echo $url === ROUTE_LUGARES_ADICIONAR ? 'btn-info' : 'btn-outline-info'; ?>"
+            href="<?php echo ROUTE_LUGARES_ADICIONAR; ?>">Adicionar Lugares</a>
     </nav>
 
     <hr>

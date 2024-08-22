@@ -1,62 +1,27 @@
-<?php
-$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-$isContatosAdicionar = $url === routeContatosAdicionar;
-$isContatosEditar = $url === routeContatosEditar;
-$isContatosExcluir = $url === routeContatosExcluir;
-
-$disabledInputClass = "bg-secondary bg-opacity-10 not-allowed";
-
-$inputCssClass = "class='form-control mb-3 " . ($isContatosExcluir ? $disabledInputClass : '') . "'";
-?>
+<?php $url = getCurrentUrl(); ?>
 
 <section class="row">
     <div class="col">
         <div class="card card-body">
-            <?php
-            echo !$isContatosExcluir ? '<div id="div_erros"></div>' : '';
+            <?php printTitle($url); ?>
 
-            if ($isContatosAdicionar) {
-                echo '<h4>Adicionar contato</h4>';
-            }
-            if ($isContatosEditar) {
-                echo '<h4>Editar contato</h4>';
-            }
-            if ($isContatosExcluir) {
-                echo '<h4>Confirmar exclusão?</h4>';
-            }
-            ?>
+            <div id="form-warning"></div>
 
             <form action="" method="post">
-                <label for="input_nome">Nome</label>
-                <input id="input_nome" type="text" name="nome"
-                    <?php
-                    echo $inputCssClass;
-                    echo $isContatosExcluir ? ' readonly ' : ' ';
-                    echo !$isContatosAdicionar ? " value='{$data['nome']}' " : '';
-                    ?>>
+                <label for="input-nome">Nome</label>
+                <input id="input-nome" type="text" name="nome" <?php printInputEssentials($url, $data, 'nome'); ?>>
 
-                <label for="input_email">Email</label>
-                <input id="input_email" type="text" name="email"
-                    <?php
-                    echo $inputCssClass;
-                    echo $isContatosExcluir ? ' readonly ' : ' ';
-                    echo !$isContatosAdicionar ? " value='{$data['email']}' " : '';
-                    ?>>
+                <label for="input-email">Email</label>
+                <input id="input-email" type="text" name="email" <?php printInputEssentials($url, $data, 'email'); ?>>
 
-                <label for="input_telefone">Telefone</label>
-                <input id="input_telefone" type="text" name="telefone"
-                    <?php
-                    echo $inputCssClass;
-                    echo $isContatosExcluir ? ' readonly ' : ' ';
-                    echo !$isContatosAdicionar ? " value='{$data['telefone']}' " : '';
-                    ?>>
+                <label for="input-telefone">Telefone</label>
+                <input id="input-telefone" type="text" name="telefone" <?php printInputEssentials($url, $data, 'telefone'); ?>>
 
                 <div class="d-flex justify-content-between">
-                    <a id="btn_cancelar" class="btn btn-danger flex-fill me-2"
-                        href="<?php echo routeContatosListar; ?>">Cancelar</a>
+                    <a id="btn-cancelar" class="btn btn-danger flex-fill me-2"
+                        href="<?php echo ROUTE_CONTATOS_LISTAR; ?>">Cancelar</a>
 
-                    <button id="btn_enviar" class="btn btn-success w-25">OK</button>
+                    <button id="btn-enviar" class="btn btn-success w-25">OK</button>
                 </div>
             </form>
         </div>

@@ -1,63 +1,97 @@
-let visitouInputNome = false;
-let visitouInputEmail = false;
-let visitouInputTelefone = false;
+const formWarning = document.querySelector('#form-warning');
 
-const divErros = document.querySelector('#div_erros');
-
-const inputNome = document.querySelector('#input_nome');
-const inputEmail = document.querySelector('#input_email');
-const inputTelefone = document.querySelector('#input_telefone');
-
-const btnEnviar = document.querySelector('#btn_enviar');
-
-const msgErro = (msg) => `<div class="alert alert-danger">${msg}</div>`;
-const inputVazio = (input) => input.value.trim() === '';
-
-function exibirErro() {
-  if (visitouInputNome && inputVazio(inputNome)) {
-    divErros.innerHTML = msgErro('Nome inválido!');
-    return;
+const inputs = {
+  nome: {
+    element: document.querySelector('#input-nome'),
+    visited: false
+  },
+  email: {
+    element: document.querySelector('#input-email'),
+    visited: false
+  },
+  telefone: {
+    element: document.querySelector('#input-telefone'),
+    visited: false
+  },
+  endereco: {
+    element: document.querySelector('#input-endereco'),
+    visited: false
   }
+};
 
-  if (visitouInputEmail && inputVazio(inputEmail)) {
-    divErros.innerHTML = msgErro('Email inválido!');
-    return;
-  }
+const btnEnviar = document.querySelector('#btn-enviar');
 
-  if (visitouInputTelefone && inputVazio(inputTelefone)) {
-    divErros.innerHTML = msgErro('Telefone inválido!');
-    return;
-  }
+const warningMsg = (msg) => `<div class="alert alert-warning">${msg}</div>`;
+const isEmpty = (input) => input.value.trim() === '';
 
-  divErros.innerHTML = '';
+function showWarning(msg) {
+  formWarning.innerHTML = msg ? warningMsg(msg) : '';
 }
 
-function validarInput(input) {
-  exibirErro();
+function hasEmptyInputs() {
+  let hasEmpty = false;
+  let showingWarning = false;
 
-  if (input.value.trim() === '') {
-    input.classList.add('is-invalid');
-    input.classList.remove('is-valid');
-    btnEnviar.setAttribute('disabled', 'disabled');
-    return;
-  }
+  Object.keys(inputs).forEach((key) => {
+    const { element, visited } = inputs[key];
 
-  input.classList.remove('is-invalid');
-  input.classList.add('is-valid');
-  btnEnviar.removeAttribute('disabled');
+    if (!element || element.readOnly || element.disabled) return;
+
+    if (isEmpty(element)) {
+      hasEmpty = true;
+
+      if (visited) {
+        showWarning(
+          `${
+            key.charAt(0).toUpperCase() + key.slice(1)
+          } precisa ser preenchido!`
+        );
+        showingWarning = true;
+      }
+    }
+
+    if (!showingWarning && visited && !isEmpty(element)) {
+      showWarning();
+    }
+  });
+
+  return hasEmpty;
 }
 
-inputNome.addEventListener('blur', () => {
-  visitouInputNome = true;
-  validarInput(inputNome);
-});
+function hasAlterableInputs() {
+  let hasAlterable = false;
 
-inputEmail.addEventListener('blur', () => {
-  visitouInputEmail = true;
-  validarInput(inputEmail);
-});
+  Object.keys(inputs).forEach((key) => {
+    if (
+      inputs[key].element &&
+      !inputs[key].element.readOnly &&
+      !inputs[key].element.disabled
+    )
+      hasAlterable = true;
+  });
 
-inputTelefone.addEventListener('blur', () => {
-  visitouInputTelefone = true;
-  validarInput(inputTelefone);
-});
+  return hasAlterable;
+}
+
+window.onload = () => {
+  Object.keys(inputs).forEach((key) => {
+    if (inputs[key].element === null) return;
+
+    inputs[key].element.addEventListener('blur', () => {
+      if (inputs[key].element.readOnly || inputs[key].element.disabled) {
+        return;
+      }
+
+      inputs[key].visited = true;
+      btnEnviar.disabled = hasEmptyInputs();
+    });
+  });
+
+  btnEnviar.disabled = hasAlterableInputs() && hasEmptyInputs();
+
+  btnEnviar.addEventListener('click', (event) => {
+    if (hasEmptyInputs()) {
+      event.preventDefault();
+    }
+  });
+};

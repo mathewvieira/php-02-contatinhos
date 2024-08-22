@@ -1,24 +1,25 @@
 <?php
 
-include '../src/controllers/lugares.php';
-include '../src/controllers/contatos.php';
+include_once '../src/utils/formsUtils.php';
+include_once '../src/utils/routesUtils.php';
 
-include_once '../config/routesNames.php';
+include '../src/controllers/lugares/lugares.php';
+include '../src/controllers/contatos/contatos.php';
 
-$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$url = getCurrentUrl();
 
 $controller = match ($url) {
-    routeHome => 'contatos_listar',
+    ROUTE_HOME => 'contatos_listar',
 
-    routeContatosListar => 'contatos_listar',
-    routeContatosExcluir => 'contatos_excluir',
-    routeContatosEditar => 'contatos_editar',
-    routeContatosAdicionar => 'contatos_adicionar',
+    ROUTE_CONTATOS_LISTAR => 'contatos_listar',
+    ROUTE_CONTATOS_EXCLUIR => 'contatos_excluir',
+    ROUTE_CONTATOS_EDITAR => 'contatos_editar',
+    ROUTE_CONTATOS_ADICIONAR => 'contatos_adicionar',
 
-    routeLugaresListar => 'lugares_listar',
-    routeLugaresExcluir => 'lugares_excluir',
-    routeLugaresEditar => 'lugares_editar',
-    routeLugaresAdicionar => 'lugares_adicionar',
+    ROUTE_LUGARES_LISTAR => 'lugares_listar',
+    ROUTE_LUGARES_EXCLUIR => 'lugares_excluir',
+    ROUTE_LUGARES_EDITAR => 'lugares_editar',
+    ROUTE_LUGARES_ADICIONAR => 'lugares_adicionar',
 
     default => null
 };

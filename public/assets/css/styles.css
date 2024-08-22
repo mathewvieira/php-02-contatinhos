@@ -1,3 +1,23 @@
 .not-allowed {
   cursor: not-allowed;
 }
+/* 
+.star-rating {
+  direction: rtl;
+}
+
+.star-rating input[type='radio'] {
+  display: none;
+}
+
+.star-rating label {
+  cursor: pointer;
+  padding: 0;
+  margin-right: 10px;
+}
+
+.star-rating label:hover i,
+.star-rating input[type='radio']:checked ~ label i {
+  color: gold;
+} 
+*/

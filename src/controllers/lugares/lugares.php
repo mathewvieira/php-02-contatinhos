@@ -10,26 +10,27 @@ const SQL_LUGARES_DELETE_BY_ID = 'DELETE FROM tb_lugares WHERE id = :id; ';
 
 function lugares_listar(): void
 {
-    $query = connection()->prepare(SQL_LUGARES_SELECT_ALL);
+    $query = getConnection()->prepare(SQL_LUGARES_SELECT_ALL);
     $query->execute();
 
-    view('lugaresListar', $query->fetchAll());
+    view(ROUTE_LUGARES_LISTAR, $query->fetchAll());
 }
 
 function lugares_editar(): void
 {
-    if (!isset($_GET['id']))
-        header('location: ' . routeLugaresListar);
+    if (!isset($_GET['id'])) {
+        header('location: ' . ROUTE_LUGARES_LISTAR);
+    }
 
-    $id = request_input('id');
+    $id = requestInput('id');
 
     if ($_POST) {
-        $nome = request_input('nome');
-        $endereco = request_input('endereco');
-        $avaliacao = request_input('avaliacao');
+        $nome = requestInput('nome');
+        $endereco = requestInput('endereco');
+        $avaliacao = requestInput('avaliacao');
         $editedAt = date('Y-m-d H:i:s');
 
-        $query = connection()->prepare(SQL_LUGARES_UPDATE_BY_ID);
+        $query = getConnection()->prepare(SQL_LUGARES_UPDATE_BY_ID);
         $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->bindParam(':nome', $nome, PDO::PARAM_STR);
         $query->bindParam(':endereco', $endereco, PDO::PARAM_STR);
@@ -37,55 +38,56 @@ function lugares_editar(): void
         $query->bindParam(':editedAt', $editedAt);
         $query->execute();
 
-        header('location: ' . routeLugaresListar);
+        header('location: ' . ROUTE_LUGARES_LISTAR);
     }
 
-    $query = connection()->prepare(SQL_LUGARES_SELECT_BY_ID);
+    $query = getConnection()->prepare(SQL_LUGARES_SELECT_BY_ID);
     $query->bindParam(':id', $id, PDO::PARAM_INT);
     $query->execute();
 
-    view('lugaresEditar', $query->fetch(PDO::FETCH_ASSOC));
+    view(ROUTE_LUGARES_EDITAR, $query->fetch(PDO::FETCH_ASSOC));
 }
 
 function lugares_excluir(): void
 {
-    if (!isset($_GET['id']))
-        header('location: ' . routeLugaresListar);
+    if (!isset($_GET['id'])) {
+        header('location: ' . ROUTE_LUGARES_LISTAR);
+    }
 
-    $id = request_input('id');
+    $id = requestInput('id');
 
     if ($_POST) {
-        $query = connection()->prepare(SQL_LUGARES_DELETE_BY_ID);
+        $query = getConnection()->prepare(SQL_LUGARES_DELETE_BY_ID);
         $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
-        header('location: ' . routeLugaresListar);
+        header('location: ' . ROUTE_LUGARES_LISTAR);
     }
 
-    $query = connection()->prepare(SQL_LUGARES_SELECT_BY_ID);
+    $query = getConnection()->prepare(SQL_LUGARES_SELECT_BY_ID);
     $query->bindParam(':id', $id, PDO::PARAM_INT);
     $query->execute();
 
-    view('lugaresExcluir', $query->fetch(PDO::FETCH_ASSOC));
+    view(ROUTE_LUGARES_EXCLUIR, $query->fetch(PDO::FETCH_ASSOC));
 }
 
 function lugares_adicionar(): void
 {
     if ($_POST) {
-        $nome = request_input('nome');
-        $endereco = request_input('endereco');
-        $avaliacao = request_input('avaliacao');
+        $nome = requestInput('nome');
+        $endereco = requestInput('endereco');
+        $avaliacao = requestInput('avaliacao');
         $createdAt = date('Y-m-d H:i:s');
 
-        $query = connection()->prepare(SQL_LUGARES_INSERT);
+        $query = getConnection()->prepare(SQL_LUGARES_INSERT);
         $query->bindParam(':nome', $nome, PDO::PARAM_STR);
         $query->bindParam(':endereco', $endereco, PDO::PARAM_STR);
         $query->bindParam(':avaliacao', $avaliacao, PDO::PARAM_INT);
         $query->bindParam(':createdAt', $createdAt);
         $query->execute();
 
-        header('location: ' . routeLugaresListar);
+        header('location: ' . ROUTE_LUGARES_LISTAR);
     }
 
-    view('lugaresAdicionar');
+    view(ROUTE_LUGARES_ADICIONAR);
 }
