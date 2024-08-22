@@ -1,16 +1,18 @@
-<div class="table-responsive card">
-    <table class="table table-bordered table-striped table-hover mb-0">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Endereço</th>
-                <th>Avaliação</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($data as $row) { ?>
+<?php if (count($data) > 0) { ?>
+
+    <div class="table-responsive card">
+        <table class="table table-bordered table-striped table-hover mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>Avaliação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($data as $row) { ?>
                     <tr>
                         <td><?php echo $row['id']; ?></td>
                         <td><?php echo $row['nome']; ?></td>
@@ -47,7 +49,15 @@
                             <a href='<?php echo $linkExcluir; ?>'>Excluir</a>
                         </td>
                     </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php
+
+} else {
+    echo "<span>Nenhum registro encontrado. Clique em <a href='" . ROUTE_LUGARES_ADICIONAR . "'>Adicionar Lugar</a> para criar.</span>";
+}
+
+?>

@@ -26,13 +26,13 @@
             href="<?php echo ROUTE_CONTATOS_LISTAR; ?>">Listar Contatos</a>
 
         <a class="btn <?php echo $url === ROUTE_CONTATOS_ADICIONAR ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="<?php echo ROUTE_CONTATOS_ADICIONAR; ?>">Adicionar Contatos</a>
+            href="<?php echo ROUTE_CONTATOS_ADICIONAR; ?>">Adicionar Contato</a>
 
         <a class="btn <?php echo $url === ROUTE_LUGARES_LISTAR ? 'btn-info' : 'btn-outline-info'; ?>"
             href="<?php echo ROUTE_LUGARES_LISTAR; ?>">Listar Lugares</a>
 
         <a class="btn <?php echo $url === ROUTE_LUGARES_ADICIONAR ? 'btn-info' : 'btn-outline-info'; ?>"
-            href="<?php echo ROUTE_LUGARES_ADICIONAR; ?>">Adicionar Lugares</a>
+            href="<?php echo ROUTE_LUGARES_ADICIONAR; ?>">Adicionar Lugar</a>
     </nav>
 
     <hr>
