@@ -18,8 +18,8 @@ function requestInput(string $nome): mixed
     return htmlspecialchars($_POST[$nome] ?? $_GET[$nome]);
 }
 
-function getConnection(): void
+function getConnection(): object
 {
-    include "../src/conexao.php";
+    return include "../src/conexao.php";
 }
 
