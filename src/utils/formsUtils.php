@@ -1,6 +1,6 @@
 <?php
 
-function printTitle($url)
+function printTitle(string $url): void
 {
     if (str_contains($url, 'adicionar'))
         echo '<h4>Adicionar ' . (isContatosAdicionar($url) ? 'contato' : 'lugar') . '</h4>';
@@ -12,7 +12,7 @@ function printTitle($url)
         echo '<h4>Confirmar exclusão?</h4>';
 }
 
-function printInputClass($url)
+function printInputClass(string $url): void
 {
     $operacaoExcluir = isContatosExcluir($url) || isLugaresExcluir($url);
 
@@ -24,28 +24,28 @@ function printInputClass($url)
     echo "class='{$classNames}'";
 }
 
-function printAttrReadOnly($url)
+function printAttrReadOnly(string $url): void
 {
     $operacaoExcluir = isContatosExcluir($url) || isLugaresExcluir($url);
 
     echo $operacaoExcluir ? ' readonly ' : '';
 }
 
-function printValue($url, $data, $field)
+function printValue(string $url, mixed $data, string $field): void
 {
     $operacaoAdicionar = isContatosAdicionar($url) || isLugaresAdicionar($url);
 
     echo !$operacaoAdicionar ? " value='{$data[$field]}' " : '';
 }
 
-function printInputEssentials($url, $data, $field)
+function printInputEssentials(string $url, mixed $data, string $field): void
 {
     printInputClass($url);
     printAttrReadOnly($url);
     printValue($url, $data, $field);
 }
 
-function printAttrChecked($url, $data, $field, $radioValue, $firstRadio = false)
+function printAttrChecked(string $url, mixed $data, string $field, mixed $radioValue, bool $firstRadio = false): void
 {
     $operacaoAdicionar = isContatosAdicionar($url) || isLugaresAdicionar($url);
 
@@ -56,5 +56,4 @@ function printAttrChecked($url, $data, $field, $radioValue, $firstRadio = false)
     }
 
     echo $data[$field] === $radioValue ? ' checked ' : '';
-
 }
