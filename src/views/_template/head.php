@@ -20,7 +20,7 @@
     <hr>
 
     <?php $url = getCurrentUrl(); ?>
-
+    
     <nav>
         <a class="btn <?php echo $url === ROUTE_CONTATOS_LISTAR ? 'btn-info' : 'btn-outline-info'; ?>"
             href="<?php echo ROUTE_CONTATOS_LISTAR; ?>">Listar Contatos</a>
@@ -36,3 +36,14 @@
     </nav>
 
     <hr>
+
+    <?php if (isset($_SESSION['sucesso'])) {  ?>
+
+    <div class="toast align-items-center text-bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+        <div class="toast-body"><?php echo $_SESSION['sucesso']; ?> - OK </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+
+<?php } ?>
